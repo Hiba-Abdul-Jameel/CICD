@@ -2,6 +2,4 @@
 Edit 1
 Edit 2
 Edit
-Hi
-'hi
-hi
+Hi from us. This is the DevOps Team.
