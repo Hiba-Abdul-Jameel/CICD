@@ -36,7 +36,7 @@ pipeline {
             steps {
                 // Add steps for executing the test file
                 // For example:
-                sh 'python test_html.py'
+                sh 'test_html.py'
             }
         }
     }
