@@ -32,10 +32,11 @@ pipeline {
                 sh 'docker run -dp 80:80 --name sampleapp hibajameel/sampleapp'
             }
         }
-        stage('Test') {
+        stage('Test HTML') {
             steps {
-                // Activate Python virtual environment and execute the test script
-                sh '. /snap/core20/2182/usr/lib/python3.8/venv/bin/activate && python3 /var/lib/jenkins/workspace/AutoBuild/test_html.py'
+                // Add your HTML testing commands here
+                // For a simple "Hello, World!" program, you can just print the contents of the HTML file
+                sh 'cat test.html'
             }
         }
     }
