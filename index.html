@@ -1,29 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-body {
-  margin-left: 200px;
-  background: #5d9ab2 url("img_tree.png") no-repeat top left;
-}
-
-.center_div {
-  border: 1px solid gray;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-  background-color: #d0f0f6;
-  text-align: left;
-  padding: 8px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        input[type="text"],
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        select {
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        .success {
+            color: green;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        #summary {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="center_div">
-  <h1>Hello World! DevOps</h1>
-  <p>Successfully implemented CICD pipeline.</p>
+<div class="container">
+    <h1 style="color: #007bff;">Enter Your Education Details</h1>
+    <form id="educationForm" onsubmit="return validateForm()">
+        <label for="school">School:</label>
+        <input type="text" id="school" name="school" placeholder="Enter your school name">
+        <div id="schoolError" class="error"></div>
+
+        <label for="degree">Degree:</label>
+        <select id="degree" name="degree">
+            <option value="">Select your degree</option>
+            <option value="highschool">High School</option>
+            <option value="bachelor">Bachelor's Degree</option>
+            <option value="master">Master's Degree</option>
+            <option value="phd">PhD</option>
+            <option value="other">Other</option>
+        </select>
+        <div id="degreeError" class="error"></div>
+
+        <label for="field">Field of Study:</label>
+        <input type="text" id="field" name="field" placeholder="Enter your field of study">
+        <div id="fieldError" class="error"></div>
+
+        <label for="year">Year of Graduation:</label>
+        <input type="text" id="year" name="year" placeholder="Enter your year of graduation">
+        <div id="yearError" class="error"></div>
+
+        <button type="submit" style="background-color: #007bff;">Submit</button>
+    </form>
+
+    <div id="summary" style="display: none;">
+        <h2 style="color: #007bff;">Education Details Summary</h2>
+        <p><strong>School:</strong> <span id="summarySchool"></span></p>
+        <p><strong>Degree:</strong> <span id="summaryDegree"></span></p>
+        <p><strong>Field of Study:</strong> <span id="summaryField"></span></p>
+        <p><strong>Year of Graduation:</strong> <span id="summaryYear"></span></p>
+    </div>
 </div>
+
+<script>
+    function validateForm() {
+        var school = document.getElementById("school").value;
+        var degree = document.getElementById("degree").value;
+        var field = document.getElementById("field").value;
+        var year = document.getElementById("year").value;
+
+        var isValid = true;
+
+        if (school === "") {
+            document.getElementById("schoolError").innerText = "Please enter your school name";
+            isValid = false;
+        } else {
+            document.getElementById("schoolError").innerText = "";
+        }
+
+        if (degree === "") {
+            document.getElementById("degreeError").innerText = "Please select your degree";
+            isValid = false;
+        } else {
+            document.getElementById("degreeError").innerText = "";
+        }
+
+        if (field === "") {
+            document.getElementById("fieldError").innerText = "Please enter your field of study";
+            isValid = false;
+        } else {
+            document.getElementById("fieldError").innerText = "";
+        }
+
+        if (year === "") {
+            document.getElementById("yearError").innerText = "Please enter your year of graduation";
+            isValid = false;
+        } else {
+            document.getElementById("yearError").innerText = "";
+        }
+
+        if (isValid) {
+            document.getElementById("summarySchool").innerText = school;
+            document.getElementById("summaryDegree").innerText = degree;
+            document.getElementById("summaryField").innerText = field;
+            document.getElementById("summaryYear").innerText = year;
+            document.getElementById("summary").style.display = "block";
+        }
+
+        return isValid;
+    }
+</script>
 
 </body>
 </html>
