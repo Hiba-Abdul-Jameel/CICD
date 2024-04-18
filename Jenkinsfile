@@ -34,8 +34,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                // Execute the test script using Python 3 from /usr/bin/
-                sh '/usr/bin/python3 test_html.py'
+                // Activate Python virtual environment and execute the test script
+                sh 'source /snap/core18/2812/usr/lib/python3.6/venv/bin/activate && python3 /var/lib/jenkins/workspace/AutoBuild/test_html.py'
             }
         }
     }
