@@ -34,8 +34,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                // Activate Python virtual environment and execute the test script
-               sh '/snap/core18/2812/usr/lib/python3.6/venv/bin/python3 /var/lib/jenkins/workspace/AutoBuild/test_html.py'
+        script {
+            def pythonInterpreter = sh(script: 'which python3', returnStdout: true).trim()
+            sh "${pythonInterpreter} /var/lib/jenkins/workspace/AutoBuild/test_html.py"
             }
         }
     }
