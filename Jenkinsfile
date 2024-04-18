@@ -34,9 +34,8 @@ pipeline {
         }
         stage('Test HTML') {
             steps {
-                // Open the HTML file in a web browser for testing
-                sh 'xdg-open test.html || open test.html || start test.html'
-            }
+                // Print a message with instructions for manual testing
+                echo 'Please open test.html in a web browser to test the HTML content.'            }
         }
     }
 }
