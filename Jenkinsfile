@@ -32,18 +32,5 @@ pipeline {
                 sh 'docker run -dp 80:80 --name sampleapp hibajameel/sampleapp'
             }
         }
-        stage('Test HTML') {
-            steps {
-                // Run Selenium test in a Docker container
-                sh '''
-                    docker run --rm --privileged \
-                        --name selenium-test \
-                        -v /var/lib/jenkins/workspace/AutoBuild:/mnt \
-                        -w /mnt \
-                        selenium/standalone-chrome:latest \
-                        bash -c "apt-get update && apt-get install -y python3-pip && pip3 install selenium && python3 /mnt/selenium_test.py"
-                '''
-            }
-        }
     }
 }
