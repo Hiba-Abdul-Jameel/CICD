@@ -36,13 +36,13 @@ pipeline {
             steps {
                 // Run Selenium test in a Docker container
                 sh '''
-                    docker run --rm \
-                        --name selenium-test \
-                        -v "$(pwd)":/mnt \
-                        -w /mnt \
-                        selenium/standalone-chrome:latest \
-                        bash -c "pip install selenium && python /mnt/selenium_test.py"
-                '''
+            docker run --rm \
+                --name selenium-test \
+                -v "$(pwd)":/mnt \
+                -w /mnt \
+                selenium/standalone-chrome:latest \
+                bash -c "apt-get update && apt-get install -y python3-pip && pip3 install selenium && python3 /mnt/selenium_test.py"
+        '''
             }
         }
     }
