@@ -34,9 +34,8 @@ pipeline {
         }
         stage('Test HTML') {
             steps {
-                // Add your HTML testing commands here
-                // For a simple "Hello, World!" program, you can just print the contents of the HTML file
-                sh 'cat test.html'
+                // Open the HTML file in a web browser for testing
+                sh 'xdg-open test.html || open test.html || start test.html'
             }
         }
     }
