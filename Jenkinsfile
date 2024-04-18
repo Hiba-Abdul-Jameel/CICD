@@ -34,8 +34,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-                // Execute the test file
-                sh '/usr/bin/python3 test_html.py'
+                // Set the PATH to include user-specific Python environment
+                script {
+                    env.PATH = "${env.HOME}/.local/bin:${env.PATH}"
+                }
+                // Execute the test file with the user-specific Python interpreter
+                sh 'python3 test_html.py'
             }
         }
     }
