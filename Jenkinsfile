@@ -32,11 +32,16 @@ pipeline {
                 sh 'docker run -dp 80:80 --name sampleapp hibajameel/sampleapp'
             }
         }
+        stage('Debug') {
+            steps {
+                // Print the contents of the workspace directory
+                sh 'ls -al'
+            }
+        }
         stage('Test') {
             steps {
-                // Add steps for executing the test file
-                // For example:
-                sh 'test_html.py'
+                // Execute the test file
+                sh 'python test_html.py'
             }
         }
     }
