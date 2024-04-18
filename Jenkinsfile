@@ -32,14 +32,16 @@ pipeline {
                 sh 'docker run -dp 80:80 --name sampleapp hibajameel/sampleapp'
             }
         }
+        stage('Debug') {
+            steps {
+                // Print Python environment variables
+                sh 'python3 -c "import sys; print(sys.prefix); print(sys.path)"'
+            }
+        }
         stage('Test') {
             steps {
-                // Set the PATH to include user-specific Python environment
-                script {
-                    env.PATH = "${env.HOME}/.local/bin:${env.PATH}"
-                }
-                // Execute the test file with the user-specific Python interpreter
-                sh 'python3 test_html.py'
+                // Execute the test file with the full path to the Python interpreter
+                sh '/usr/bin/python3 test_html.py'
             }
         }
     }
