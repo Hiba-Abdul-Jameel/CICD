@@ -1,32 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Test Result Page</title>
-  <style>
-    .result {
-      font-size: 20px;
-      margin-top: 20px;
-    }
-  </style>
+  <title>Test Page</title>
 </head>
 <body>
 
-<h1>Test Result</h1>
+<h1>Welcome to My Test Page</h1>
 
-<div id="testResult" class="result">Test result will be displayed here</div>
+<p>This is a paragraph of text.</p>
+
+<button id="clickMeButton">Click Me</button>
 
 <script>
-  // Simulating a test job result
-  var testPassed = Math.random() < 0.5; // Simulating a random pass or fail
-  var resultElement = document.getElementById("testResult");
-  
-  if (testPassed) {
-    resultElement.textContent = "Test passed!";
-    resultElement.style.color = "green";
-  } else {
-    resultElement.textContent = "Test failed!";
-    resultElement.style.color = "red";
-  }
+  document.getElementById("clickMeButton").addEventListener("click", function() {
+    alert("Button clicked!");
+  });
 </script>
 
 </body>
