@@ -34,29 +34,14 @@ pipeline {
         }
         stage('Test HTML with Selenium') {
             steps {
-                // Install required packages (e.g., Chrome WebDriver)
-                sh 'apt-get update'
-                sh 'apt-get install -y chromium-browser chromium-chromedriver'
-
-                // Run Selenium test
-                sh 'pip install selenium'
+                // Run Selenium test in a Docker container
                 sh '''
-                    python <<EOF
-                    from selenium import webdriver
-
-                    options = webdriver.ChromeOptions()
-                    options.add_argument("--no-sandbox")
-                    options.add_argument("--disable-dev-shm-usage")
-                    options.binary_location = "/usr/bin/chromium-browser"
-
-                    driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=options)
-                    driver.get("file:///path/to/your/repo/test.html") // Replace with the actual path to your HTML file in the repo
-
-                    assert "Welcome to My Test Page" in driver.title
-                    assert "This is a paragraph of text." in driver.page_source
-
-                    driver.quit()
-                    EOF
+                    docker run --rm \
+                        --name selenium-test \
+                        -v "$(pwd)":/mnt \
+                        -w /mnt \
+                        selenium/standalone-chrome:latest \
+                        bash -c "pip install selenium && python /mnt/selenium_test.py"
                 '''
             }
         }
