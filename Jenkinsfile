@@ -32,10 +32,33 @@ pipeline {
                 sh 'docker run -dp 80:80 --name sampleapp hibajameel/sampleapp'
             }
         }
-        stage('Test HTML') {
+        stage('Test HTML with Selenium') {
             steps {
-                // Print a message with instructions for manual testing
-                echo 'Please open test.html in a web browser to test the HTML content.'            }
+                // Install required packages (e.g., Chrome WebDriver)
+                sh 'apt-get update'
+                sh 'apt-get install -y chromium-browser chromium-chromedriver'
+
+                // Run Selenium test
+                sh 'pip install selenium'
+                sh '''
+                    python <<EOF
+                    from selenium import webdriver
+
+                    options = webdriver.ChromeOptions()
+                    options.add_argument("--no-sandbox")
+                    options.add_argument("--disable-dev-shm-usage")
+                    options.binary_location = "/usr/bin/chromium-browser"
+
+                    driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=options)
+                    driver.get("file:///path/to/your/repo/test.html") // Replace with the actual path to your HTML file in the repo
+
+                    assert "Welcome to My Test Page" in driver.title
+                    assert "This is a paragraph of text." in driver.page_source
+
+                    driver.quit()
+                    EOF
+                '''
+            }
         }
     }
 }
