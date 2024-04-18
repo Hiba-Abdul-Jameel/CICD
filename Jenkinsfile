@@ -35,7 +35,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Execute the test file
-                sh 'python test_html.py'
+                sh '/usr/bin/python3 test_html.py'
             }
         }
     }
