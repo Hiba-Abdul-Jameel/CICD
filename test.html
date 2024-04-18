@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Test HTML File</title>
+  <title>Test Result Page</title>
+  <style>
+    .result {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Hello, World!</h1>
+<h1>Test Result</h1>
 
-<button onclick="displayHello()">Click me for a greeting!</button>
+<div id="testResult" class="result">Test result will be displayed here</div>
 
 <script>
-  function displayHello() {
-    alert("Hello, World!");
+  // Simulating a test job result
+  var testPassed = Math.random() < 0.5; // Simulating a random pass or fail
+  var resultElement = document.getElementById("testResult");
+  
+  if (testPassed) {
+    resultElement.textContent = "Test passed!";
+    resultElement.style.color = "green";
+  } else {
+    resultElement.textContent = "Test failed!";
+    resultElement.style.color = "red";
   }
 </script>
 
